@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import RepositoriesSummary from './RepositoriesSummary';
 import { hasUncaughtExceptionCaptureCallback } from 'process';
 
-test('displays the primary language of the repo', () => {
+test('displays the info about the repo', () => {
   const repository = {
     language: 'javascript',
     stargazers_count: 5,
@@ -12,7 +12,10 @@ test('displays the primary language of the repo', () => {
 
   render(<RepositoriesSummary repository={repository} />);
 
-  const lang = screen.getByText('javascript');
+  for (let key in repository) {
+    const value = repository[key];
+    const element = screen.getByText(new RegExp(value));
 
-  expect(lang).toBeInTheDocument();
+    expect(element).toBeInTheDocument();
+  }
 });
