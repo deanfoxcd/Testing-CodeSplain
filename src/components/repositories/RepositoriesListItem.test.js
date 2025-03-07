@@ -15,6 +15,7 @@ function renderComponent() {
     language: 'javascript',
     description: 'A js library',
     owner: 'facebook',
+    name: 'react',
     html_url: 'https://www.github.com/facebook-react',
   };
 
@@ -23,12 +24,17 @@ function renderComponent() {
       <RepositoriesListItem repository={repository} />;
     </MemoryRouter>
   );
+
+  return { repository };
 }
 
 test('displays a link to the github repo', async () => {
-  renderComponent();
+  const { repository } = renderComponent();
 
   await screen.findByRole('img', { name: /javascript/i });
+
+  const link = screen.getByRole('link', { name: /github repo/i });
+  expect(link).toHaveAttribute('href', repository.html_url);
 });
 
 // const pause = () => {
