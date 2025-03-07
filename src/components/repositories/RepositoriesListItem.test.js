@@ -44,3 +44,11 @@ test('displays a link to the github repo', async () => {
 //     }, 100);
 //   });
 // };
+
+test('displays a file icon with appropriate icon', async () => {
+  renderComponent();
+
+  const icon = await screen.findByRole('img', { name: /javascript/i });
+
+  expect(icon).toHaveClass('js-icon');
+});
