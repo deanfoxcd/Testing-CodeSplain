@@ -41,7 +41,23 @@ test('renders 2 links for each table(language)', async () => {
     </MemoryRouter>
   );
 
-  screen.findByRole();
+  const languages = [
+    'javascript',
+    'typescript',
+    'rust',
+    'go',
+    'python',
+    'java',
+  ];
 
-  screen.debug();
+  for (let lang of languages) {
+    const links = await screen.findAllByRole('link', {
+      name: new RegExp(`${lang}_`),
+    });
+    expect(links).toHaveLength(2);
+    expect(links[0]).toHaveTextContent(`${lang}_one`);
+    expect(links[1]).toHaveTextContent(`${lang}_two`);
+    expect(links[0]).toHaveAttribute('href', `/repositories/${lang}_one`);
+    expect(links[1]).toHaveAttribute('href', `/repositories/${lang}_two`);
+  }
 });
