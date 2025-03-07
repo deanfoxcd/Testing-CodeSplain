@@ -35,22 +35,6 @@ import { createServer } from '../test/server';
 //   server.close();
 // });
 
-// createServer([
-//   {
-//     path: '/api/repositories',
-//     res: (req) => {
-//       const language = req.url.searchParams.get('q').split('language:')[1];
-//       return {
-//         items: [
-//           { id: 1, full_name: `${language}_one` },
-//           { id: 2, full_name: `${language}_two` },
-//         ],
-//       };
-//     },
-//   },
-// ]);
-
-// COPY PASTE
 createServer([
   {
     path: '/api/repositories',
