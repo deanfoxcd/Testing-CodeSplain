@@ -1,6 +1,13 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import RepositoriesListItem from './RepositoriesListItem';
 import { MemoryRouter } from 'react-router';
+
+// Creating a mock funtion that replaces the File Icon Component to avoid rendering that component and messing up the test
+// jest.mock('../tree/Fileicon', () => {
+//   return () => {
+//     return 'File Icon Component';
+//   };
+// });
 
 function renderComponent() {
   const repository = {
@@ -18,6 +25,16 @@ function renderComponent() {
   );
 }
 
-test('displays a link to the github repo', () => {
+test('displays a link to the github repo', async () => {
   renderComponent();
+
+  await screen.findByRole('img', { name: /javascript/i });
 });
+
+// const pause = () => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve();
+//     }, 100);
+//   });
+// };
